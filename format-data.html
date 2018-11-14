@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        textarea{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>空格添加‘,’</h4>
+    <div><textarea type="text" id="input" rows="6"></textarea></div>
+    <div><button onclick="changeData()">转换</button></div>
+    <div><textarea type="text" id="output" rows="6"></textarea></div>
+
+    <h4>批量生成代码</h4>
+    <div><textarea type="text" id="input2" rows="6"></textarea></div>
+    <div><button onclick="changeData2()">转换</button></div>
+    <div><textarea type="text" id="output2" rows="6"></textarea></div>
+</div>
+</body>
+<script src="js/public/jquery-1.11.3.min.js"></script>
+<script>
+    function changeData () {
+        var input = $('#input').val();
+        // input = input.split(' ');
+        var out = []
+        /* for (var i = 0, len = input.length; i < len; i++) {
+             if (input[i] != '' && input[i] != '\n') {
+                 out.push(input[i]);
+             }
+         }*/
+        out=input.replace(/(\S+)\s+(\S+)/g, "$1, $2");
+        $('#output').val(out);
+    }
+
+    function changeData2(){
+        var input = $('#input2').val();
+        input = input.split('\n');
+        var out = []
+        for (var i = 0, len = input.length; i < len; i++) {
+            if(input[i]!==''){
+                var item=input[i].replace(/(\S+)\s+(\S+)/g, "$1, $2");
+                var row=item.split(',')
+                var s=' <div class="tableList">\n' +
+                    '        <div class="name">'+row[0]+'</div>\n' +
+                    '        <div class="product">'+row[1]+'</div>\n' +
+                    '    </div>\n';
+                out.push(s);
+            }
+        }
+        $('#output2').val(out.join(''));
+    }
+</script>
+</html>

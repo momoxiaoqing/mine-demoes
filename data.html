@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link href="css/public/bootstrap.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        @media (max-width: 767px){
+            .menu{
+                min-width: 200px;
+            }
+            .data_block{
+                margin:20px 0;
+                width: 100%;
+            }
+
+        }
+        .list1,.list2,.list3,.list4{
+            cursor: pointer;
+        }
+        .menu_black .selected{
+            text-decoration: underline;
+        }
+        .none{
+            display: none;
+        }
+
+        .menu_ion {
+            float: right;
+            font-size: 24px;
+            margin-top: -5px;
+        }
+        #main{
+            width: 95%;
+            height: 360px;
+            margin-right: 5%;
+        }
+
+        .form_list span{
+            width: 19%;
+            display: inline-block;
+            *display:inline;
+            *zoom:1;
+            padding: 7px;
+            text-align: center;
+        }
+        .form_list ul{
+            padding: 0;
+            margin: 0 5%;
+        }
+        .form_list{
+            margin: 40px 0;
+        }
+        .data_head{
+            margin: 20px 5%;
+            overflow: auto;
+            zoom: 1;
+        }
+        .chart_block{
+            margin-right: 5%;
+        }
+        .index_title {
+            font-size: 24px;
+        }
+        .col-xs-7{
+            text-align: right;
+        }
+        .data_head span{
+            padding: 7px 30px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .data_list {
+            height: 350px;
+            overflow: auto;
+        }
+        @media (max-width: 768px) {
+            .menu_black .list1{
+                padding: 0.5rem 10%;
+                font-size: 1.2rem;
+            }
+            .list2{
+                padding: 0.4rem 10% 0.4rem 20%;
+                font-size: 1.1rem;
+            }
+            .list3{
+                padding: 0.3rem 12% 0.3rem 30%
+            }
+            .list4{
+                padding: 0.3rem 14% 0.3rem 40%;
+            }
+            .form_list{
+                font-size: 0.7rem;
+            }
+            .menu_ion{
+                font-size: 1rem;
+                margin-top: -0.2rem;
+            }
+            .index_title{
+                font-size: 1.2rem;
+            }
+            .data_head span{
+                padding: 0.1rem 0.5rem;
+            }
+            .col-xs-7{
+                padding: 0;
+            }
+        }
+
+
+        /*layer.css开始*/
+        ul{
+            list-style: none;
+        }
+        .row {
+            margin: 0;
+        }
+        /*左右结构开始*/
+
+        .menu{
+            width: 25%;
+            max-width: 300px;
+        }
+        .data_block{
+            margin:0 3%;
+            width: 69%;
+        }
+        .menu>ul{
+            margin-bottom: 30px;
+        }
+        .menu ul{
+            padding: 0;
+        }
+        .list1,.exam_title{
+            padding: 15px 10%;
+            font-size: 18px;
+        }
+        .list2{
+            padding: 10px 10% 10px 20%;
+            font-size: 16px;
+        }
+        .exam_item{
+            padding: 10px 10%;
+            font-size: 14px;
+        }
+        .list3{
+            padding: 10px 12% 10px 30%;
+        }
+        .list4{
+            padding: 10px 14% 10px 40%;
+        }
+        /*左右结构结束*/
+        /*layer.css结束*/
+
+        /*data颜色开始*/
+        .menu_black>ul{
+            border-left: solid 1px #3399CC;
+            border-right: solid 1px #3399CC;
+        }
+        .menu_black .list1{
+            background-color: #3399CC;
+            color: #fff;
+        }
+        .menu_black .selected,.menu_black .list2:hover,.menu_black .list3:hover,.menu_black .list4:hover{
+            color: #3399CC;
+        }
+        .list1.selected{
+            color: #fff;
+        }
+        .menu_black .list2,.menu_black .list3,.menu_black .list4{
+            border-bottom: solid 1px #3399CC;
+        }
+        .data_block{
+            border: solid 1px #ccc;
+        }
+        .data_list li:nth-child(odd){
+            background-color: #ccc;
+        }
+        .form_list_first{
+            border: solid 1px #ccc;
+        }
+        .data_list li{
+            border: solid 1px #ccc;
+            border-top: transparent;
+        }
+        .data_head span{
+            color: #3399CC;
+            border: solid 1px #3399CC;
+        }
+        .data_head span.selected{
+            background-color: #3399CC;
+            color: #fff;
+        }
+        .up{
+            color: red;
+        }
+        .down{
+            color: green;
+        }
+        #sure,#cancel{
+            border: transparent;
+            color: #fff;
+        }
+        #sure{
+            background-color: #333;
+        }
+        #cancel{
+            background-color: #999;
+        }
+        .menu_value {
+            border: solid 1px #ccc;
+            padding: 5px 15px;
+        }
+        /*data颜色结束*/
+
+    </style>
+</head>
+<body>
+<div class="head"></div>
+
+<div class="container block_margin content">
+    <div class="pull-left menu menu_black">
+        <!-- <ul class="menu_item">
+             <li>
+                 <div class="list1 selected" value="4-root" ><span>价格指数</span></div>
+                 <div id="product_price">
+                 </div>
+             </li>
+
+         </ul>-->
+        <ul class="menu_item" id="boom">
+            <li>
+                <div class="list1" value="3-root" onclick="menuListAction(this)"><span>景气指数</span></div>
+                <div>
+                    <ul>
+                        <li>
+                            <div class="list2" onclick="menuListAction(this)" value="3-root">
+                                <span>行业景气指数</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <ul class="menu_item" id="">
+            <li>
+                <div class="list1" value="2-root" onclick="menuListAction(this)"><span>环境指数</span></div>
+                <div>
+                    <ul>
+                        <li>
+                            <div class="list2" onclick="menuListAction(this)" value="2-root">
+                                <span>行业环境指数</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="pull-left data_block">
+        <div class="data_head">
+            <div class="row">
+                <div class="col-xs-5 col-sm-5 index_title">价格指数</div>
+                <div class="col-xs-7 col-sm-7 index_type">
+                    <span class="selected" value="base" id="base">定基</span>
+                    <span value="last">环比</span>
+                    <span value="same">同比</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div id="main"></div>
+        </div>
+        <div class="form_list">
+            <ul>
+                <li class="form_list_first">
+                    <!--<span>序号</span><span>
+                    日期</span><span>
+                    本期指数</span><span>
+                    差值</span><span>
+                    涨幅</span>-->
+                </li>
+            </ul>
+            <ul class="data_list"></ul>
+        </div>
+    </div>
+</div>
+<div class="block_margin foot"></div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="js/public/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/public/bootstrap-3.3.5.js"></script>
+<script type="text/javascript" src="js/public/echarts.min.js"></script>
+<script src="js/public/layer/layer.js"></script>
+<script >
+
+    $(function () {
+        var treeStr="";
+        getTree();
+        getData(1,"root");
+
+        $(".menu_value").click(function () {
+            var index = layer.open({
+                title:'指数选择',
+                type: 2,
+                content: 'menu.html',
+                area: ['300px','500px'],
+                offset:['60px'],
+                end:function () {
+                    var value=$(".menu_value").attr("value") || "4-root";
+                    if(chooseStr!=value){
+                        chooseStr=value;
+                        var valueArray=value.split("-");
+                        getData(valueArray[0],valueArray[1]);
+                    }
+                }
+            });
+        });
+
+        $(".data_head span").click(function () {
+            if(!$(this).hasClass("selected")){
+                $(".data_head span.selected").removeClass("selected");
+                $(this).addClass("selected");
+                var value=$(".menu_item .selected").attr("value") || "20-root";
+                var valueArray=value.split("-");
+                var typeStr=$(this).attr("value");
+                if(typeStr=="base"){
+                    getData(valueArray[0],valueArray[1],typeStr);
+                }else{
+                    getData(valueArray[0],valueArray[1],typeStr,true,"gap-rate");
+                }
+            }
+        });
+
+    });
+
+    //common
+    var BASE_URL = "/webapi";
+    function getAjax(url, param,isAsync) {
+        return $.ajax({
+            type: "get",
+            url: BASE_URL + url,
+            async:isAsync || true,
+            contentType: "application/json",
+            // dataType: 'json',
+            data: param
+        });
+    }
+
+    //初始化参数
+    function initOption(xData, yData) {
+        var minV = Math.min.apply(null, yData);
+        var maxV = Math.max.apply(null, yData);
+        var pjV = Math.ceil((maxV - minV) / 5);
+        var averageV = (maxV + minV) / 2;
+        var option = {
+            title: {
+                text: "", //flag,
+                textStyle: {
+                    color: '#666',
+                    fontStyle: 'normal',
+                    fontWeight: 'normal',
+                    fontSize: 14
+                },
+                padding: [5, 5, 5, 48]
+            },
+            tooltip: {trigger: 'axis'},
+            legend: {
+                data: ['指数']
+            },
+            grid: {
+                left: '6%',
+                right: '7%',
+                bottom: '12%',
+                top: '20%',
+                containLabel: true
+
+            },
+            dataZoom: {
+                show: true,
+                realtime: true,
+                y: 330,
+                height: 20,
+                start: 0,
+                end: 100,
+                dataBackgroundColor: '#efefff',
+                fillerColor: 'rgba(182,162,222,0.2)',
+                handleColor: '#ccc'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {show: true},
+                    magicType: {show: true, type: ['line', 'bar']},
+                    restore: {show: true},
+                    saveAsImage: {show: true}
+                },
+                iconStyle: {
+                    normal: {
+                        borderColor: "#ccc",
+                        width: 1
+                    }
+                }
+            },
+            calculable: true,
+            xAxis: {
+                type: 'category',
+                boundaryGap: true,
+                data: xData
+            },
+            yAxis: {
+                name: '',
+                type: 'value',
+                min: Number((Math.min.apply(null, yData) - 2).toFixed(0)),
+                max: Number((Math.max.apply(null, yData) + 2).toFixed(0)),
+                interval: pjV,
+                axisLabel: {
+                    formatter: '{value}'
+                }
+            },
+            series: [{
+                name: '',
+                type: 'line',
+                // symbol:'none',
+                smooth: true,
+                symbolSize: 6,
+                showAllSymbol: true,
+                data: yData,
+                markPoint: {
+                    data: [
+                        {type: 'max', name: '最大值'},
+                        {type: 'min', name: '最小值'}],
+                    symbolSize: 80,
+                    animation: true
+
+                },
+                markLine: {
+                    data: [
+                        {
+                            name: 'Y 轴值为 103 的水平线',
+                            yAxis: averageV
+                        }]
+                },
+                lineStyle: {normal: {color: "#E26D1E", width: 2}},  //折线拐点标志的样式
+                itemStyle: {normal: {color: "#E26D1E", width: 2}}
+            }]
+        };
+        return option;
+    }
+
+
+    //递归获取树形结构
+    // 注：data.length已确定存在
+    function getTreeStr(data,floor,ishide) {
+        if (data.length) {
+            ishide=ishide||1; // 默认隐藏
+            if(floor>2){
+                treeStr += '<ul class="none"> ';
+            }
+            else{
+                treeStr+='<ul>';
+            }
+            for (var i = 0; i < data.length; i++) {
+                treeStr += '<li > <div  value="' + data[i].projId+'-'+data[i].code+ '" class="list'+floor;
+                if (data[i].nodes && data[i].nodes.length) {
+                    treeStr+='" onclick= menuListAction(this)>' +'<span class="tree_name">' + data[i].name + '</span> <span class="menu_ion">+</span></div>';
+                    var newFloor=floor+1;
+                    getTreeStr(data[i].nodes,newFloor,ishide);
+                } else{
+                    treeStr+=' list_last"  onclick= menuListAction(this)><span class="tree_name">' + data[i].name + '</span></div>';
+                }
+            }
+            treeStr += "</ul>";
+        }
+    }
+
+    function getTreeItem(id,$el,isSelect) {
+        /*  isSelect=isSelect||false; //默认不将第一个list设置为selected*/
+        var param={
+            depth:4
+        };
+        getAjax("/index/project/"+id+"/struct",param,false).then(function (res) {
+            if(res.success){
+                if(res.data){
+                    treeStr="";
+                    getTreeStr(res.data.nodes,2);
+                    $el.html(treeStr);
+                    /*  if(isSelect){
+                     $(el).find(".list2").first().addClass("selected");
+                     }*/
+                }
+            }else {
+                layer.msg(res.message);
+            }
+        },function (err) {
+            layer.msg("网络连接失败，请重新加载！")
+        });
+    }
+
+    function getTree() {
+        var treeArray=[
+            {
+                id:1,
+                name:"价格指数"
+            }
+        ];
+        var str="";
+        for(var i=0;i<treeArray.length;i++){
+            str+='<ul class="menu_item"> <li> <div onclick="menuListAction(this)" class="list1 ';
+            if(i==0){
+                str+='selected'
+            }
+            str+='" value="'+treeArray[i].id+'-root" ><span>'+treeArray[i].name +'</span></div> <div> </div> </li> </ul>';
+        }
+        $(".menu").prepend(str);
+        for(var i=0;i<treeArray.length;i++){
+            var $el=$(".menu_item").eq(i).find("div").last();
+            getTreeItem(treeArray[i].id,$el);
+        }
+    }
+
+    function menuListAction(obj) {
+        //根据数组顺序，决定tableNoItem和dateType
+        var table_array=[
+            {
+                tableNoItem:"-",
+                dateType:"month"
+            },{
+                tableNoItem:"-rate",
+                dateType:"month"
+            },{
+                tableNoItem:"-",
+                dateType:"half"
+            }];
+
+        var index=$(obj).parents(".menu_item").index();
+        if(!$(obj).hasClass("selected")){
+
+            //3个比的显示问题
+            if(index>0){
+                $(".index_type").hide();
+            }else{
+                $(".index_type").show().find(".selected").removeClass("selected");
+                $("#base").addClass("selected");
+            }
+        }
+
+        if($(obj).hasClass("list_last")){
+            if(!$(obj).hasClass("selected")){
+                $(".menu .selected").removeClass("selected");
+                $(obj).addClass("selected");
+                var value=$(obj).attr("value");
+                if(document.body.clientWidth>=735){
+                    var valueArray=value.split("-");
+                    getData(valueArray[0],valueArray[1],"base",true,table_array[index].tableNoItem,table_array[index].dateType)
+                }
+                var title=$(obj).find("span").first().text();
+                $(".index_title").text(title);
+            }
+        }else{  //有子层时
+            if(!$(obj).hasClass("selected")){
+                $(".menu .selected").removeClass("selected");
+                if($(obj).hasClass("list1")){
+                    //第一层
+                    $(obj).addClass("selected");
+                }else{
+                    $(obj).addClass("selected").find(".menu_ion").text("-");
+                    $(obj).next().slideDown(600);
+                }
+                var value=$(obj).attr("value");
+                if(document.body.clientWidth>=735){
+                    var valueArray=value.split("-");
+                    getData(valueArray[0],valueArray[1],"base",true,table_array[index].tableNoItem,table_array[index].dateType)
+                }
+                var title=$(obj).find("span").first().text();
+                $(".index_title").text(title);
+            }else{
+                //收起
+                if(!$(obj).hasClass("list1")){
+                    $(".menu .selected").next().removeClass("none").slideUp(600);
+                    $(obj).removeClass("selected").find(".menu_ion").text("+");
+                }
+            }
+        }
+
+    }
+
+    function setList(data) {
+        if(data.length){
+            var str="";
+            for(var i=0;i<data.length;i++){
+                str+=' <div class="item"> <div class="col-xs-12 col-sm-7"><a href="article.html?id='+data[i].id+'">'+data[i].title
+                    +'</a></div> <div class="col-xs-6 col-sm-3 font_right">日期：';
+                var time=data[i].publishTime || data[i].createTime;
+                str+=time+'</div> <div class="col-xs-6 col-sm-2 font_right">阅读：'+data[i].readNum+'</div> </div>';
+            }
+            $(".comment_list").html(str);
+            /* if(isWidthMin(768)){
+             wordLimit(".short");
+             }*/
+        }
+    }
+
+
+    //指数数据转换
+    //compareType 定基："base"  环比:"last"  同比:"same"
+    //dateType   日度(2017-08-11)   月度(2017-08):"month "    季度(2017Q1):"quarter "     半年度(2017上):"half"    年度(2017):"year"
+    function getIndexData(data,compareType,dateType) {
+        dateType=dateType||"month";
+        var xData=[],yData=[],gap=[],rate=[],y;
+        compareType=compareType||"base";
+        for(var i=0;i<data.length;i++){
+            var date=data[i].publishTime;
+            var date_array=date.split("-");
+            if(dateType=="month"){
+                date=date_array[0]+"-"+date_array[1];
+            }
+            if(dateType=="quarter"){
+                var quarter=parseInt(date_array[1]/4)+1;
+                date=date_array[0]+"Q"+quarter;
+            }
+            if(dateType=="half"){
+                date=date_array[0];
+                if(date_array[1]>=6){
+                    date+="上";
+                }else{
+                    date+="下";
+                }
+            }
+            if(dateType=="year"){
+                date=date_array[0];
+            }
+            xData.unshift(date);
+        }
+
+        for(var i=0;i<data.length;i++){
+            if(compareType=="last"){
+                y=(data[i].indexValue+data[i].lastGap).toFixed(2);
+                yData.unshift(y);
+                gap.unshift(data[i].lastGap.toFixed(2));
+                rate.unshift((data[i].lastRate*100).toFixed(2));
+            }else if(compareType == "same"){
+                y=(data[i].indexValue+data[i].sameGap).toFixed(2);
+                yData.unshift(y);
+                gap.unshift(data[i].sameGap.toFixed(2));
+                rate.unshift((data[i].sameRate*100).toFixed(2));
+            }else{
+                yData.unshift(data[i].indexValue.toFixed(2));
+                gap.unshift(data[i].baseGap.toFixed(2));
+                rate.unshift((data[i].baseRate*100).toFixed(2));
+            }
+        }
+        return {
+            xData:xData,
+            yData:yData,
+            gap:gap,
+            rate:rate
+        }
+    }
+
+
+
+    //显示图
+    function showChart(data, elStr) {
+        if (data) {
+            var option = initOption(data.xData, data.yData);
+            // 指定图表的配置项和数据
+            var idStr = elStr || "main";
+            if (isIELow8()) {
+                $("#" + idStr).empty();
+            }
+            var myChart = echarts.init(document.getElementById(idStr), 'macarons');
+            myChart.setOption(option);
+        }
+    }
+
+    //获取指数数据并绘制图和表格
+    function getData(projId,code,compareType,isSetTable,tableNoItem,dateType,elStr) {
+        compareType=compareType || "base";
+        isSetTable=isSetTable||true;
+        tableNoItem=tableNoItem||"-";
+        var url="/index/project/"+projId+"/data?structCode="+code;
+        getAjax(url).then(function (res) {
+            if(res.success){
+                if(res.data){
+                    var data=getIndexData(res.data,compareType,dateType);
+                    showChart(data,elStr);
+                    if(isSetTable){
+                        setTable(data,tableNoItem);
+                    }
+                }
+            }else {
+                layer.msg(res.error.message);
+            }
+        },function (err) {
+            layer.msg("网络连接失败，请重新加载！")
+        });
+    }
+
+    //绘制表格
+    //tableNoItem 不显示的项  涨跌值和涨跌幅都不显示："gap-rate"  涨跌值不显示："gap-"    涨跌幅不显示："-rate"  都显示"-"
+    function setTable(data,tableNoItem) {
+        tableNoItem=tableNoItem||"-";
+        var noItem_array=tableNoItem.split("-");
+        var table_item=3;
+        var str='<ul> <li class="form_list_first"><span>序号</span><span>日期</span><span>本期指数</span>';
+        if(noItem_array[0]==""){
+            str+='<span>差值</span>';
+            table_item++;
+        }
+        if(noItem_array[1]==""){
+            str+='<span>涨幅</span>';
+            table_item++;
+        }
+        str+=' </li> </ul>';
+        var width=(100/table_item).toFixed(2)+"%";
+        if(data){
+            str+='<ul class="data_list">';
+            for(var i=data.yData.length-1;i>=0;i--){
+                str+='<li class=""> <span>'+(data.yData.length-i)+'</span><span>'+data.xData[i]+'</span><span>'+data.yData[i]+'</span>';
+                if(noItem_array[0]==""){
+                    if(data.gap[i]>0){
+                        str+= '<span class="up">'
+                    }else if(data.gap[i]<0){
+                        str+= '<span class="down">'
+                    }else{
+                        str+= '<span>'
+                    }
+                    str+=data.gap[i]+'</span>';
+                }
+                if(noItem_array[1]==""){
+                    if(data.rate[i]>0){
+                        str+= '<span class="up">'
+                    }else if(data.rate[i]<0){
+                        str+= '<span class="down">'
+                    }else{
+                        str+= '<span>'
+                    }
+                    str+=data.rate[i]+'%</span> </li>';
+                }
+            }
+            str+="</ul>"
+        }
+        $(".form_list").html(str);
+        $(".form_list span").css("width",width);
+    }
+
+    function isIELow8(isWarn) {
+        var explorer = window.navigator.userAgent.toLowerCase();
+        //ie
+        var iswarn = isWarn || 0;
+        var isLow = false;
+        if (explorer.indexOf("msie") >= 0) {
+            var ver = explorer.match(/msie ([\d.]+)/)[1];
+            if (ver <= 8) {
+                if (ver < 7 && iswarn) {
+                    layer.msg("IE版本过低，建议使用IE7以上");
+                }
+                isLow = true;
+            }
+        }
+        return isLow;
+    }
+</script>
+</body>
+</html>

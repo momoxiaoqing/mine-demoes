@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            text-align: center;
+        }
+        .test2D h4{
+            width: 200px;
+            height: 200px;
+            background-color: #2b542c;
+            color: #fff;
+            margin: auto;
+            line-height: 200px;
+        }
+        .test2D button{
+            background-color: #2b542c;
+            color: #fff;
+            border: transparent;
+            padding: 7px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .set2D{
+            position: absolute;
+            top:40px;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="test2D">
+    <h4 >matrix</h4>
+    <div class="set2D">
+        <div>a:<input type="text" id="a" value="1"></div>
+        <div>b:<input type="text" id="b"></div>
+        <div>c:<input type="text" id="c"></div>
+        <div>d:<input type="text" id="d" value="1"></div>
+        <div>e:<input type="text" id="e"></div>
+        <div>f:<input type="text" id="f"></div>
+        <div><button>matrix it</button></div>
+    </div>
+</div>
+</body>
+<script src="../js/public/jquery-1.11.3.min.js"></script>
+<script>
+    $(function () {
+        console.log($(".test2D h4").css("transform-origin"));
+        $(".test2D button").click(function () {
+            var a=$("#a").val()||0;
+            var b=$("#b").val()||0;
+            var c=$("#c").val()||0;
+            var d=$("#d").val()||0;
+            var e=$("#e").val()||0;
+            var f=$("#f").val()||0;
+            var str='matrix('+a+','+b+','+c+','+d+','+e+','+f+')';
+            $(".test2D h4").css("transform",str);
+        });
+    });
+</script>
+</html>

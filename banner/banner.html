@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>banner-demo</title>
+    <link href="../css/public/bootstrap.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .carousel-control{
+            top: 150px;
+            font-size: 60px;
+            text-align: center;
+            width: 50px;
+            height: 120px;
+            line-height: 120px;
+        }
+        .carousel-control.left,.carousel-control.right{
+            background-image: none;
+        }
+        .carousel-control:hover{
+            background: rgba(125, 125, 125, .3)
+        }
+        #banner1,#banner2,#banner3{
+            width: 100%;
+        }
+        /*基础版开始*/
+        .banner_img{
+            height: 500px;
+            width: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+        /*基础版结束*/
+        /*覆盖版开始*/
+        .banner_block{
+            position: relative;
+            overflow: hidden;
+        }
+        .zigzag-bottom{
+            bottom: -50px;
+            height: 185px;
+            left: -5%;
+            position: absolute;
+            transform: rotate(-3deg);
+            width: 108%;
+            z-index: 9;
+            background: none repeat scroll 0 0 #1abc9c;
+        }
+        /*覆盖版结束*/
+        /*不动版开始*/
+        #banner3 .slide1,#banner3 .slide2,#banner3 .slide3{
+            background: url(../image/9.jpg)center fixed;
+            background-size: cover;
+            min-height: 500px;
+        }
+        /*不动版结束*/
+        .slide1{
+            background-image: url(../image/3.jpg);
+        }
+        .slide2{
+            background-image: url(../image/5.jpg);
+        }
+        .slide3{
+            background-image: url(../image/9.jpg);
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="banner_item">
+    <h4>不动版：</h4>
+    <div id="banner3"  class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="banner_img slide1"></div>
+            </div>
+            <div class="item">
+                <div class="banner_img slide2"></div>
+            </div>
+            <div class="item">
+                <div class="banner_img slide3"></div>
+            </div>
+        </div>
+        <div>
+            <ul class="carousel-indicators">
+                <li data-target="#banner" data-slide-to="0" class="active"></li>
+                <li data-target="#banner" data-slide-to="1"></li>
+                <li data-target="#banner" data-slide-to="2"></li>
+            </ul>
+        </div>
+        <a class="carousel-control left" href="#banner3"
+           data-slide="prev">&lsaquo;
+        </a>
+        <a class="carousel-control right" href="#banner3"
+           data-slide="next">&rsaquo;
+        </a>
+    </div>
+</div>
+
+
+<div class="banner_item">
+    <h4>基础版：</h4>
+    <div id="banner1" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="banner_img slide1"></div>
+            </div>
+            <div class="item">
+                <div class="banner_img slide2"></div>
+            </div>
+            <div class="item">
+                <div class="banner_img slide3"></div>
+            </div>
+        </div>
+        <div>
+            <ul class="carousel-indicators">
+                <li data-target="#banner" data-slide-to="0" class="active"></li>
+                <li data-target="#banner" data-slide-to="1"></li>
+                <li data-target="#banner" data-slide-to="2"></li>
+            </ul>
+        </div>
+        <a class="carousel-control left" href="#banner1"
+           data-slide="prev">&lsaquo;
+        </a>
+        <a class="carousel-control right" href="#banner1"
+           data-slide="next">&rsaquo;
+        </a>
+    </div>
+</div>
+
+<div class="banner_item banner_block">
+    <h4>覆盖版：</h4>
+    <div class="zigzag-bottom"></div>
+    <div id="banner2"  class="carousel slide">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="banner_img slide1"></div>
+            </div>
+            <div class="item">
+                <div class="banner_img slide2"></div>
+            </div>
+            <div class="item">
+                <div class="banner_img slide3"></div>
+            </div>
+        </div>
+        <div>
+            <ul class="carousel-indicators">
+                <li data-target="#banner" data-slide-to="0" class="active"></li>
+                <li data-target="#banner" data-slide-to="1"></li>
+                <li data-target="#banner" data-slide-to="2"></li>
+            </ul>
+        </div>
+        <a class="carousel-control left" href="#banner2"
+           data-slide="prev">&lsaquo;
+        </a>
+        <a class="carousel-control right" href="#banner2"
+           data-slide="next">&rsaquo;
+        </a>
+    </div>
+</div>
+
+
+</body>
+<script src="../js/public/jquery-1.11.3.min.js"></script>
+<script src="../js/public/bootstrap-3.3.5.js"></script>
+<script>
+    $(function () {
+        $('.carousel').carousel();
+    });
+</script>
+</html>

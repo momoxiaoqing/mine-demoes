@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <title>hover-demo</title>
+    <link href="css/public/bootstrap.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .item{
+            margin-left: 30px;
+        }
+        .hover-up{
+            cursor: pointer;
+            width: 300px;
+            height: 300px;
+            overflow: hidden;
+        }
+        .hover-up .img{
+            background-image: url("image/1.jpg");
+            width: 100%;
+            height: 100%;
+        }
+        .up_block{
+            background-color: #3582A0;
+            width: 100%;
+            height: 100px;
+            transition: all 500ms ease;
+        }
+        .up_block h4{
+            color: #fff;
+            text-align: center;
+            font-size: 2rem;
+            line-height: 100px;
+            margin: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="item">
+    <h4>上浮效果</h4>
+    <div class="hover-up">
+        <div class="img"></div>
+        <div class="up_block"><h4>test</h4></div>
+    </div>
+</div>
+</body>
+<script src="js/public/jquery-1.11.3.min.js"></script>
+<script src="js/public/bootstrap-3.3.5.js"></script>
+<script>
+$(function () {
+    $(".hover-up").hover(function () {
+        $(".up_block").css("transform","translateY(-100px)");
+    },function () {
+        $(".up_block").css("transform","translateY(0)");
+    });
+});
+</script>
+</html>

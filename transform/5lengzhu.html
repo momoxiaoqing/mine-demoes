@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #000032;
+        }
+        #shape{
+            position: relative;
+            top: 160px;
+            margin: 0 auto;
+            height: 100px;
+            width: 300px;
+            -webkit-transform: translateZ(0px) rotateY(-10deg) rotateX(-15deg);
+            transform: translateZ(0px) rotateY(-10deg) rotateX(-15deg);
+            -o-transform: translateZ(0px);
+            -moz-transition: translateZ(0px);
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        .plane{
+            position: absolute;
+            width:300px;
+            height: 100px;
+            border: 1px solid #333;
+            -webkit-box-sizing: border-box;
+            text-align: center;
+            font-family: Times, serif;
+            font-size: 24pt;
+            line-height: 100px;
+            color: #fff;
+            background-color: rgba(51, 102, 204, 0.5);
+        }
+        /*横向*/
+        .one{
+            transform: translateZ(206px);
+        }
+        .two{
+            transform: rotateY(72deg) translateZ(206px);
+        }
+        .three{
+            transform: rotateY(144deg) translateZ(206px);
+        }
+        .four{
+            transform: rotateY(216deg) translateZ(206px);
+        }
+        .five{
+            transform: rotateY(288deg) translateZ(206px);
+        }
+      /*  纵向*/
+       /* .one{
+            transform: translateZ(69px);
+        }
+        .two{
+            transform: rotateX(72deg) translateZ(69px);
+        }
+        .three{
+            transform: rotateX(144deg) translateZ(69px);
+        }
+        .four{
+            transform: rotateX(216deg) translateZ(69px);
+        }
+        .five{
+            transform: rotateX(288deg) translateZ(69px);
+        }*/
+
+        /*动画开始*/
+        .shapeAim{
+            -webkit-animation: spin 10s infinite linear;
+            -o-animation: spin 10s infinite linear;
+            -moz-animation: spin 10s infinite linear;
+            animation: spin 10s infinite linear;
+           /* transform-origin: bottom left;*/
+        }
+        /*横向*/
+        @-webkit-keyframes spin {
+            from { -webkit-transform: rotateY(0deg); }
+            to   { -webkit-transform: rotateY(-360deg); }
+        }
+        @-moz-keyframes spin {
+            from { -moz-transform: rotateY(0deg); }
+            to   { -moz-transform: rotateY(-360deg); }
+        }
+        @-o-keyframes spin {
+            from { -o-transform: rotateY(0deg); }
+            to   { -o-transform: rotateY(-360deg); }
+        }
+        @keyframes spin {
+            from { transform: rotateY(0deg) rotateX(-10deg)/* scale(0,0);*/ }
+            to   { transform: rotateY(-360deg) rotateX(-10deg)/* scale(1,1) ;*/ }
+        }
+
+        /*纵向*/
+      /*
+        @-webkit-keyframes spin {
+            from { -webkit-transform: rotateX(0deg); }
+            to   { -webkit-transform: rotateX(-360deg); }
+        }
+        @-moz-keyframes spin {
+            from { -moz-transform: rotateX(0deg); }
+            to   { -moz-transform: rotateX(-360deg); }
+        }
+        @-o-keyframes spin {
+            from { -o-transform: rotateX(0deg); }
+            to   { -o-transform: rotateX(-360deg); }
+        }
+        @keyframes spin {
+            from { transform: rotateX(0deg) rotateY(-10deg); }
+            to   { transform: rotateX(-360deg) rotateY(-10deg); }
+        }*/
+
+        /*动画结束*/
+    </style>
+</head>
+<body>
+<div id="shape" class="ring shapeAim">
+    <div class="plane one">1</div>
+    <div class="plane two">2</div>
+    <div class="plane three">3</div>
+    <div class="plane four">4</div>
+    <div class="plane five">5</div>
+</div>
+</body>
+</html>
