@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>horse-race-lamp</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 1170px;
+            margin: auto;
+            border: solid 1px #ccc;
+        }
+
+        .race-div {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .race-content {
+            overflow: auto;
+            zoom: 1;
+        }
+
+        .race-content > div {
+            float: left;
+            border: solid 1px #ccc;
+            text-align: center;
+            padding: 30px 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="race-div" id="race-1">
+        <div class="race-content">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+            <div class="item">6</div>
+            <div class="item">7</div>
+            <div class="item">8</div>
+            <div class="item">9</div>
+            <div class="item">10</div>
+        </div>
+    </div>
+</div>
+<script src="../js/public/jquery-1.11.3.min.js"></script>
+<script>
+    $(function () {
+        initRace(5, 10);
+
+        // 滚动
+        function initRace (showSize, marginHorizontal) {
+            marginHorizontal=marginHorizontal||0;
+            var size=$('.race-content>div').size();
+            var raceWidth = $('.race-div').width();
+            var itemWidth = raceWidth / showSize;
+
+            $('.race-content>div').css({
+                'width': itemWidth - marginHorizontal*2,
+                'margin-left': marginHorizontal ,
+                'margin-right': marginHorizontal
+            });
+
+            if(size>=showSize){
+                var wholeWidth = itemWidth * size*2;
+                $('.race-content').css('width', wholeWidth);
+                $('.race-content').append($('.race-content').html());
+
+                race();
+            }
+
+            function race () {
+                var speed=40;
+                var $div=$('.race-div');
+                var contentLeft = $div.scrollLeft();
+                var scrollWidth=wholeWidth/2;
+
+                var timer=setInterval(Marquee,speed);
+
+                function Marquee () {
+                    console.log(scrollWidth)
+                    if (contentLeft >= scrollWidth) {
+                        contentLeft=0;
+                    } else {
+                        contentLeft++;
+                    }
+                    $div.scrollLeft(contentLeft);
+                    console.log(contentLeft)
+                }
+
+                var id=$div.attr('id');
+
+                document.getElementById(id).addEventListener("mouseleave",function (event) {
+                    // relatedTarget在不正常触发mouseleave时，返回null
+                    if(event.relatedTarget){
+                        timer=setInterval(Marquee,speed);
+                    }
+                });
+                document.getElementById(id).addEventListener("mouseenter",function (event) {
+                    if(event.relatedTarget){
+                        clearInterval(timer)
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>
