@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM test 27</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            height: 3000px;
+        }
+
+        #backTop{
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+
+
+        #bodyDiv {
+            height: 500px;
+            overflow: auto;
+        }
+        .content {
+            height: 3000px;
+            background-color: #ddd;
+        }
+
+        .content2 {
+            height: 1500px;
+            background-color: silver;
+        }
+        .body-border{
+            position: relative;
+        }
+        #backTop2{
+            position: absolute;
+            bottom: 10px;
+            right: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="body-border">
+    <div id="bodyDiv">
+        <div class="content2">bodyDiv</div>
+    </div>
+    <a href="#" id="backTop2" onclick="backTop2()" hidden>返回顶部2</a>
+</div>
+<div class="content">body content</div>
+<a href="#" id="backTop" onclick="backTop()" hidden>返回顶部</a>
+<script>
+
+    var divBody = document.getElementById('bodyDiv')
+    var isHiddenBody = document.getElementById('backTop').getAttribute('hidden');
+    var isHiddenBody2 = document.getElementById('backTop2').getAttribute('hidden');
+
+    window.addEventListener('scroll', bodyScroll);
+    divBody.addEventListener('scroll', divScroll);
+
+    function bodyScroll (e) {
+        var windownHeight = window.screen.availHeight;
+        if (document.body.scrollHeight > windownHeight) {
+            var top = document.body.scrollTop || document.documentElement.scrollTop;
+            if (top >= windownHeight && isHiddenBody !== null) {
+                document.getElementById('backTop').removeAttribute('hidden');
+                isHiddenBody = null
+            } else if (top < windownHeight && isHiddenBody === null) {
+                document.getElementById('backTop').setAttribute('hidden', '');
+                isHiddenBody = ''
+            }
+        }
+    }
+
+    function divScroll (e) {
+        var divHeight = divBody.offsetHeight;
+        if (divBody.scrollHeight > divHeight) {
+            var top = divBody.scrollTop;
+            if (top >= divHeight && isHiddenBody2 !== null) {
+                document.getElementById('backTop2').removeAttribute('hidden');
+                isHiddenBody2 = null
+            } else if (top < divHeight && isHiddenBody2 === null) {
+                document.getElementById('backTop2').setAttribute('hidden', '');
+                isHiddenBody2 = ''
+            }
+        }
+    }
+
+    function backTop () {
+        document.getElementsByTagName('body')[0].scrollTop = 0;
+    }
+
+    function backTop2 () {
+        document.getElementById('bodyDiv').scrollTop = 0;
+    }
+</script>
+</body>
+</html>

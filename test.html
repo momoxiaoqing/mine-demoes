@@ -5,49 +5,115 @@
     <title>Title</title>
 </head>
 <body>
-<div id="parent" class="parent" style="width: 100%;height: 100px;background-color: #ddd">
-    <div id="children" class="children" style="width: 50px;height: 50px;background-color: #d9534f;cursor: pointer">
-        test
-    </div>
-</div>
+
 </body>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
-    /*  $("#parent").mouseover(function () {
-     console.log("over")
-     }).mouseout(function () {
-     console.log("out")
-     });*/
-    $("#parent").mouseenter(function () {
-        console.log("enter")
-    }).mouseleave(function () {
-        console.log("leave")
+    function print (index) {
+        return setTimeout(function () {
+            console.log(index)
+            return index;
+        }, 1000)
+    }
+
+    function print2 (index) {
+        setTimeout(function () {
+            console.log(index)
+        }, 1000)
+    }
+
+    for (var i = 0; i < 10; i++) {
+        /* (function (e) {
+             setTimeout(function () {
+                 console.log(e);
+             },3000)
+         })(i)*/
+        print2(i)
+    }
+
+    (function () {
+        console.log('()')
+    }())
+
+
+    function consfunc (v) {
+        return function () {
+            return v
+        }
+    }
+
+    var func = [];
+    for (var i = 0; i < 10; i++) {
+        func[i] = consfunc(i)
+    }
+    func[5](); //5
+
+    /*    function outer () {
+            var local = 2;
+
+            function inner () {
+                return local += 2;
+            }
+
+            return inner()
+        }
+
+        var fn = outer()
+        console.log(fn)
+        console.log(fn)
+
+        var fn2 = outer()
+        console.log(fn2)*/
+    /*------------------------------------变化后--------------------------------------*/
+
+    var local = 'global'
+
+    function outer () {
+        var local = 'local';
+
+        function print () {
+            console.log(local)
+        }
+
+        print();
+    }
+
+    outer(); // local
+
+
+
+    function inherit (p) {
+        function f () {
+        }
+
+        f.prototype = p
+        return new f();
+    }
+
+    function print () {
+        console.log('out')
+    }
+
+    var a = print;
+    var b = inherit(a)
+
+    function fn () {
+
+    }
+
+
+    var a=1
+    delete a   //false
+
+    b=2
+    delete b   //true
+
+
+    Object.keys(obj).forEach(function (key) {
+        if(key=='a'){
+            return;
+        }
+        console.log("obj ", key, ": ", obj[key]);
     });
-    $("#parent").click(function () {
-        console.log("click")
-    });
-    setInterval(function () {
-        $("#parent").click();
-    }, 1000)
-    /*  function enter() {
-     console.log("enter")
-     }
-     function leave() {
-     console.log("leave")
-     }*/
-    /* document.getElementById("parent").onmouseenter=function () {
-     console.log("enter")
-     };
-     document.getElementById("parent").onmouseleave=function () {
-     console.log("leave")
-     };*/
-    /* $(".parent").hover(function () {
-     console.log("enter")
-     },function () {
-     console.log("leave")
-     });*/
-    /*  $(".children").click(function () {
-     console.log("click")
-     });*/
+
 </script>
 </html>

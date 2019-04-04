@@ -4,22 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        textarea{
+        textarea {
             width: 100%;
         }
     </style>
 </head>
 <body>
 <div>
+    <h4>批量生成html，数组excel转换成tr+td代码</h4>
+    <div><textarea type="text" id="input3" rows="6"></textarea></div>
+    <div>
+        <button onclick="changeData3()">转换</button>
+    </div>
+    <div><textarea type="text" id="output3" rows="6"></textarea></div>
+
     <h4>空格添加‘,’</h4>
     <div><textarea type="text" id="input" rows="6"></textarea></div>
-    <div><button onclick="changeData()">转换</button></div>
+    <div>
+        <button onclick="changeData()">转换</button>
+    </div>
     <div><textarea type="text" id="output" rows="6"></textarea></div>
 
-    <h4>批量生成代码</h4>
+    <h4>批量生成对象,例：{id:$,name:$}</h4>
+    <div>
+        <input type="text" id="original">
+    </div>
+    <div>批量数据</div>
     <div><textarea type="text" id="input2" rows="6"></textarea></div>
-    <div><button onclick="changeData2()">转换</button></div>
+    <div>
+        <button onclick="changeData2()">转换</button>
+    </div>
     <div><textarea type="text" id="output2" rows="6"></textarea></div>
+
+    <h4>换行符转成‘,’，并计算其环比</h4>
+    <div><textarea type="text" id="input4" rows="6"></textarea></div>
+    <div>
+        <button onclick="changeData4()">转换</button>
+    </div>
+    <div><textarea type="text" id="output-base" rows="6"></textarea></div>
+    <div><textarea type="text" id="output-last" rows="6"></textarea></div>
+
+    <h4>date转成‘,’，并加上‘’</h4>
+    <div><textarea type="text" id="input5" rows="6"></textarea></div>
+    <div>
+        <button onclick="changeData5()">转换</button>
+    </div>
+    <div><textarea type="text" id="output5" rows="6"></textarea></div>
+
 </div>
 </body>
 <script src="js/public/jquery-1.11.3.min.js"></script>
@@ -33,26 +64,90 @@
                  out.push(input[i]);
              }
          }*/
-        out=input.replace(/(\S+)\s+(\S+)/g, "$1, $2");
+        out = input.replace(/(\S+)\s+(\S+)/g, "$1, $2");
         $('#output').val(out);
     }
 
-    function changeData2(){
+    function changeData2 () {
         var input = $('#input2').val();
         input = input.split('\n');
+        if (input[input.length - 1] == '') {
+            input.pop();
+        }
         var out = []
+        var original = $('#original').val();
+        original = original.split('$');
         for (var i = 0, len = input.length; i < len; i++) {
-            if(input[i]!==''){
-                var item=input[i].replace(/(\S+)\s+(\S+)/g, "$1, $2");
-                var row=item.split(',')
-                var s=' <div class="tableList">\n' +
-                    '        <div class="name">'+row[0]+'</div>\n' +
-                    '        <div class="product">'+row[1]+'</div>\n' +
-                    '    </div>\n';
-                out.push(s);
+            if (input[i] !== '') {
+                // var item = input[i].replace(/(\S+)\s+(\S+)/g, "$1, $2");
+                var item = input[i].replace(/\s+|    /g, ",");
+                if (item[item.length - 1] == ',') {
+                    item = item.substring(0, item.length - 1);
+                }
+                var row = item.split(',');
+                /*    var s = ' <div class="tableList">\n' +
+                '        <div class="name">' + row[0] + '</div>\n' +
+                    '        <div class="product">' + row[1] + '</div>\n' +
+                    '    </div>\n';*/
+                out.push(original[0]);
+                for (var j = 0, len2 = row.length; j < len2; j++) {
+                    var s = row[j] + original[j + 1];
+                    out.push(s);
+                }
             }
         }
         $('#output2').val(out.join(''));
+    }
+
+
+    function changeData3 () {
+        var input = $('#input3').val();
+        input = input.split('\n');
+        if (input[input.length - 1] == '') {
+            input.pop();
+        }
+        var out = [];
+        for (var i = 0, len = input.length; i < len; i++) {
+            if (input[i] !== '') {
+                var item = input[i].replace(/\s+|    /g, ",");
+                if (item[item.length - 1] == ',') {
+                    item = item.substring(0, item.length - 1);
+                }
+                var row = item.split(',');
+                var rowStr='<tr>'
+                for (var j = 0, len2 = row.length; j < len2; j++) {
+                    rowStr+='<td>'+row[j]+'</td>'
+                }
+                rowStr+='</tr>\n'
+                out.push(rowStr)
+            }
+        }
+        $('#output3').val(out.join(''));
+    }
+
+
+    function changeData4 () {
+        var input = $('#input4').val();
+        var out = input.replace(/\n/g, ",");
+        out=out.substring(0,out.length-1);
+
+        var base=out.split(',');
+        var last=['null'];
+        for(var i=1,len=base.length;i<len;i++){
+            var item=parseFloat(base[i])/parseFloat(base[i-1])*100;
+            last.push(item.toFixed(2))
+        }
+        $('#output-base').val(out);
+        $('#output-last').val(last.join(','));
+    }
+
+    function changeData5 () {
+        var input = $('#input5').val();
+        // var out = input.replace(/\/[0-9]+\n/g, "','");
+        var out = input.replace(/\n/g, "','");
+        out=out.substring(0,out.length-2);
+
+        $('#output5').val('\''+out);
     }
 </script>
 </html>

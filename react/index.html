@@ -18,8 +18,10 @@
             this.state = {
                 date: new Date(),
                 posts: [1],
-                comments: [1]
+                comments: [1],
+                count:1
             };
+            // this.add=this.add.bind(this)
         }
 
         //当组件输出到 DOM 后会执行
@@ -38,14 +40,23 @@
                 posts:[1,2,3]
             })
         }
-
+        add(){
+            this.setState((prevState)=>{
+                debugger
+                count:prevState.count++
+            })
+        }
         render () {
             return (
                 <div>
-                    <h1>Hello world !</h1>
-                    <h2>It is {this.state.date.toLocaleTimeString()}</h2>
-                    <h2>{this.state.posts}</h2>
-                    <h2>{this.state.comments}</h2>
+                    <div>{this.state.count}</div>
+                    <div><button onClick={(e)=>this.add(e)}>add</button></div>
+                    <div>
+                        <h1>Hello world !</h1>
+                        <h2>It is {this.state.date.toLocaleTimeString()}</h2>
+                        <h2>{this.state.posts}</h2>
+                        <h2>{this.state.comments}</h2>
+                    </div>
                 </div>
             )
         }
