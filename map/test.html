@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<iframe id = "iframe" src="https://map.baidu.com/su?wd=湖州喜来登温泉度假酒店&cid=179&type=0&newmap=1&pc_ver=2" onload = "test()"></iframe>
+<script src="../js/public/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+    // document.domain = 'map.qq.com';//设置成主域
+   /* function test(){
+        alert(document.getElementById('￼iframe').contentWindow);//contentWindow 可取得子窗口的 window 对象
+    }*/
+   function test () {
+       var s=$('#iframe').html()
+       debugger
+   }
+</script>
+<script>
+    function something (jsondata) {
+    }
+    function getAjax (url, param, callback) {
+        $.ajax({
+            type: "get",
+            url: url,
+            // contentType: "application/json",
+            // dataType: 'json',
+            data: param
+        }).then(function (res) {
+            if (res.success) {
+                callback(res);
+            } else {
+                layer.msg(res.error.message);
+            }
+        }, function (err) {
+            layer.msg("网络连接失败，请重新加载！")
+        });
+    }
+
+    function getIdBaiDu (name) {
+        getAjax('https://map.qq.com/m/data/place/sug',{
+            word:name
+        },function (res) {
+
+        })
+    }
+</script>
+</body>
+</html>

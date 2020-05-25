@@ -3,117 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: "思源黑体", Source Han Sans CN;
+        }
+
+        .parent-div {
+            line-height: 100px;
+            font-size: 0;
+            background-color: #ddd;
+        }
+
+        .parent-div img {
+            vertical-align: middle;
+            width: 60px;
+        }
+
+        .parent-div span {
+            display: inline-block;
+            line-height: normal;
+            vertical-align: middle;
+            font-size: 36px;
+        }
+
+        .parent-div2 > span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .big {
+            font-size: 36px;
+        }
+
+        .wrap {
+            position: relative;
+            display: flex;
+            background: rgba(0, 0, 255, 0.2);
+            max-width: 640px;
+            margin: 0 auto;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .overflow {
+            width: 50%;
+            position: static;
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+        .overflow__wrap {
+            overflow-x: auto;
+            overflow-y: hidden;
+            height: 100%;
+            height: 200px;
+        }
+        .overflow__content {
+            padding: 10px;
+            white-space: nowrap;
+        }
+        .overflow--1 {
+            background: rgba(0, 128, 0, 0.2);
+            /*
+              * If I add position relative to any of the child elements, the scroll will be visible. WTF?
+              */
+        }
+        .overflow--1 button {
+            position: relative;
+        }
+        .overflow--2 {
+            background: rgba(0, 0, 255, 0.2);
+        }
+        .overflow button {
+            display: inline-block;
+            border: 1px solid #ccc;
+            min-height: 160px;
+            background: #fff;
+            padding: 1em;
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
+<div class="parent-div" href="index-undfined.html">
+    <img src="image/1.jpg" alt="">
+    <span>test</span>
+</div>
+<div class="parent-div2">
+    <span>child 1</span>
+    <span>
+        <div class="big">big</div>
+        <div class="small">child 2</div>
+    </span>
+</div>
 
-</body>
+<div style="position:relative;border: solid 1px #ddd;width: 300px;height: 10px;overflow: hidden;margin-bottom: 30px">
+    <div style="background-color: #f7e1b5;height: 100px;line-height:30px;position: absolute">child</div>
+</div>
+
+<div style="position:relative;border: solid 1px #ddd;width: 300px;height: 30px;overflow: hidden">
+    <div style="position:relative;border: solid 1px #1b6d85;height: 20px">1</div>
+    <div style="position:relative;border: solid 1px #1b6d85;height: 20px">2</div>
+</div>
+
+
+<!--<div class="wrap">
+    <div class="overflow overflow&#45;&#45;1">
+        <div class="overflow__wrap">
+            <div class="overflow__content">
+                <button>Scroll horizontally</button>
+                <button>Horizontal scroll visible under</button>
+                <button>Horizontal scroll visible under</button>
+                <button>Horizontal scroll visible under</button>
+            </div>
+        </div>
+    </div>
+    <div class="overflow overflow&#45;&#45;2">
+        <div class="overflow__wrap">
+            <div class="overflow__content">
+                <button>Horizontal scroll hidden</button>
+                <button>Yes, really</button>
+                <button>Yes, really</button>
+                <button>Yes, really</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br/><br/><br/>
+<p>Snippet end</p>-->
 <script>
-    function print (index) {
-        return setTimeout(function () {
-            console.log(index)
-            return index;
-        }, 1000)
-    }
-
-    function print2 (index) {
-        setTimeout(function () {
-            console.log(index)
-        }, 1000)
-    }
-
-    for (var i = 0; i < 10; i++) {
-        /* (function (e) {
-             setTimeout(function () {
-                 console.log(e);
-             },3000)
-         })(i)*/
-        print2(i)
-    }
-
-    (function () {
-        console.log('()')
-    }())
-
-
-    function consfunc (v) {
-        return function () {
-            return v
-        }
-    }
-
-    var func = [];
-    for (var i = 0; i < 10; i++) {
-        func[i] = consfunc(i)
-    }
-    func[5](); //5
-
-    /*    function outer () {
-            var local = 2;
-
-            function inner () {
-                return local += 2;
-            }
-
-            return inner()
-        }
-
-        var fn = outer()
-        console.log(fn)
-        console.log(fn)
-
-        var fn2 = outer()
-        console.log(fn2)*/
-    /*------------------------------------变化后--------------------------------------*/
-
-    var local = 'global'
-
-    function outer () {
-        var local = 'local';
-
-        function print () {
-            console.log(local)
-        }
-
-        print();
-    }
-
-    outer(); // local
-
-
-
-    function inherit (p) {
-        function f () {
-        }
-
-        f.prototype = p
-        return new f();
-    }
-
-    function print () {
-        console.log('out')
-    }
-
-    var a = print;
-    var b = inherit(a)
-
-    function fn () {
-
-    }
-
-
-    var a=1
-    delete a   //false
-
-    b=2
-    delete b   //true
-
-
-    Object.keys(obj).forEach(function (key) {
-        if(key=='a'){
-            return;
-        }
-        console.log("obj ", key, ": ", obj[key]);
-    });
 
 </script>
+</body>
 </html>

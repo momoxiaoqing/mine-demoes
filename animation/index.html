@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @-webkit-keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                left: 0;
+            }
+
+            100% {
+                opacity: 1;
+                left: 300px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                left: 0;
+            }
+
+            100% {
+                opacity: 1;
+                left: 300px;
+            }
+        }
+
+        #move {
+            position: absolute;
+            /*animation-delay: 1s;*/
+            animation-name: fadeInUp;
+            animation-duration: 1s
+        }
+
+    </style>
+</head>
+<body style="position: absolute">
+<div class="" id="move" style="width:200px;height:200px;background-color: #8a6d3b">up</div>
+</body>
+</html>

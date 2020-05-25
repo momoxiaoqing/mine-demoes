@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    this.a = 1
+
+    function add () {
+        this.a++
+        console.log(this.a)
+    }
+    add()
+    function add2 () {
+        'use strict'
+        this.a++
+        console.log(this.a)
+    }
+
+    // add2()
+
+    'use strict'
+    var add3=()=>{
+        this.a++;
+        console.log(this.a)
+    }
+    add3()
+
+    this.a=1;
+    Promise.resolve().then(() => console.log(this.a));
+
+    'use strict'
+    Promise.resolve().then(function() {console.log(this.a)});
+
+</script>
+</html>

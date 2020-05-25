@@ -44,13 +44,27 @@
     <div><textarea type="text" id="output-base" rows="6"></textarea></div>
     <div><textarea type="text" id="output-last" rows="6"></textarea></div>
 
-    <h4>date转成‘,’，并加上‘’</h4>
+    <h4>列date转成‘,’，并加上‘’</h4>
     <div><textarea type="text" id="input5" rows="6"></textarea></div>
     <div>
         <button onclick="changeData5()">转换</button>
     </div>
     <div><textarea type="text" id="output5" rows="6"></textarea></div>
 
+    <h4>多行转换，总指数	110.43 	115.51 	122.05 转换为： '总指数':[110.43, 115.51, 122.05],</h4>
+    <div><textarea type="text" id="input6" rows="6"></textarea></div>
+    <div>
+        <button onclick="changeData6()">转换</button>
+    </div>
+    <div><textarea type="text" id="output6" rows="6"></textarea></div>
+
+    <h4>表格数据转换成地图数据</h4>
+    <div>批次：<input type="text" id="input7-1"></div>
+    <div><textarea type="text" id="input7" rows="6"></textarea></div>
+    <div>
+        <button onclick="changeData7()">转换</button>
+    </div>
+    <div><textarea type="text" id="output7" rows="6"></textarea></div>
 </div>
 </body>
 <script src="js/public/jquery-1.11.3.min.js"></script>
@@ -64,7 +78,8 @@
                  out.push(input[i]);
              }
          }*/
-        out = input.replace(/(\S+)\s+(\S+)/g, "$1, $2");
+        out = input.replace(/(\S+)?\s+(\S+)/g, "$1, $2");
+        var t = input.split(' ');
         $('#output').val(out);
     }
 
@@ -94,6 +109,7 @@
                     var s = row[j] + original[j + 1];
                     out.push(s);
                 }
+                out.push(',\n')
             }
         }
         $('#output2').val(out.join(''));
@@ -148,6 +164,48 @@
         out=out.substring(0,out.length-2);
 
         $('#output5').val('\''+out);
+    }
+
+    function changeData6 () {
+        var input = $('#input6').val();
+        input=input.split('\n');
+        var out='';
+        for(var i=0,len=input.length;i<len;i++){
+            if(input[i].length>0){
+                var row= input[i].replace(/(\S+)\s+(\S+)/, "$1, $2");
+                row=row.split(',');
+                var value=$.trim(row[1]);
+                out+="'"+row[0]+"':["+value.replace(/(\S+)?\s+(\S+)/g, "$1, $2")+'],\n';
+            }
+        }
+        $('#output6').val(out);
+    }
+
+    function changeData7 () {
+        var input = $('#input7').val();
+        input = input.split('\n');
+        if (input[input.length - 1] == '') {
+            input.pop();
+        }
+        var out = [];
+        var batch=$('#input7-1').val();
+        for (var i = 0, len = input.length; i < len; i++) {
+            if (input[i] !== '') {
+                var item = input[i].replace(/\s+|    /g, ",");
+                if (item[item.length - 1] == ',') {
+                    item = item.substring(0, item.length - 1);
+                }
+                var row = item.split(',');
+                var obj={
+                    name:row[0],
+                    city:row[0].substring(0,2)+'市',
+                    type:row[1].substring(0,5),
+                    batch:batch
+                }
+                out.push(JSON.stringify(obj))
+            }
+        }
+        $('#output7').val(out.join(',\n'));
     }
 </script>
 </html>

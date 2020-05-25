@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>步行路线规划</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <style>
+        html,body,#container{
+            height:100%;
+        }
+        .btn{
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            width: 11rem
+        }
+    </style>
+</head>
+<body>
+<div id="container" ></div>
+<div class="info"  style='min-width:10rem;'>
+    <img src="//a.amap.com/lbs/static/img/js-walkingonapp.png" style='width:120px;height:120px'>
+    <div style='text-align: center'>手机扫码打开示例</div>
+</div>
+<input type='button' id='callApp' class="btn" value='点击调起高德地图'/>
+
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=cf05f578af748cfadd923e776cee19b0&plugin=AMap.ToolBar"></script>
+<script>
+var map = new AMap.Map("container");
+AMap.plugin(["AMap.Walking"], function() {
+    var drivingOption = {
+        map:map
+    };
+
+    var walking = new AMap.Walking(drivingOption); //构造驾车导航类
+    //根据起终点坐标规划驾车路线
+    walking.search([{keyword:'首开广场',city:'010'},{keyword:'绿地中心',city:'010'}], function(status, result){
+        button.onclick = function(){
+            walking.searchOnAMAP({
+                origin:result.origin,
+                destination:result.destination
+            });
+        }
+    });
+
+});
+
+var button = document.getElementById('callApp');
+if(AMap.UA.mobile){
+    document.getElementsByClassName('info')[0].style.display='none';
+    button.style.fontSize = '16px';
+}else{
+    button.style.marginRight = '10px';
+}
+</script>
+</body>
+</html>

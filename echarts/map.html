@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="map" style="width: 1000px;height: 1000px;margin: 30px auto"></div>
+<script src="../js/public/jquery-1.11.3.min.js"></script>
+<script src="../js/public/map/echarts.min.js"></script>
+<script src="../js/public/map/hengyang-test.js"></script>
+<script>
+    $(function () {
+        showChart1();
+    });
+
+    function showChart (option, elStr) {
+        var chart = echarts.init(document.getElementById(elStr));
+        chart.setOption(option);
+    }
+
+    function showChart1 () {
+        var data = {
+            'theFirst': [
+                {name: '沙集镇', value: 279}
+            ],
+            'mainAddress': [
+                {name: '菏泽市', value: 250},
+                {name: '金华市', value: 250},
+                {name: '台州市', value: 250},
+                {name: '宁波市', value: 250},
+                {name: '温州市', value: 250},
+                {name: '泉州市', value: 250},
+                {name: '杭州市', value: 250},
+                {name: '嘉兴市', value: 250},
+            ],
+            'address': [
+                {name: '长阳镇', value: 250},
+                {name: '城门镇', value: 250},
+                {name: '福州市', value: 250},
+                {name: '仓山区', value: 250},
+                {name: '莆田市', value: 250},
+                {name: '厦门市', value: 250},
+                {name: '潮州市', value: 250},
+                {name: '东莞市', value: 250},
+                {name: '佛山市', value: 250},
+                {name: '广州市', value: 250},
+                {name: '惠州市', value: 250},
+                {name: '江门市', value: 250},
+                {name: '揭阳市', value: 250},
+                {name: '汕头市', value: 250},
+                {name: '中山市', value: 250},
+                {name: '保定市', value: 250},
+                {name: '沧州市', value: 250},
+                {name: '廊坊市', value: 250},
+                {name: '石家庄市', value: 250},
+                {name: '唐山市', value: 250},
+                {name: '邢台市', value: 250},
+                {name: '洛阳市', value: 250},
+                {name: '郑州市', value: 250},
+                {name: '常州市', value: 250},
+                {name: '苏州市', value: 250},
+                {name: '无锡市', value: 250},
+                {name: '宿迁市', value: 250},
+                {name: '徐州市', value: 250},
+                {name: '鞍山市', value: 250},
+                {name: '滨州市', value: 250},
+                {name: '青岛市', value: 250},
+                {name: '天津市', value: 250},
+                {name: '湖州市', value: 250},
+                {name: '连云港市', value: 250},
+                {name: '南通市', value: 250},
+                {name: '泰州市', value: 250},
+                {name: '绍兴市', value: 250},
+                {name: '泰安市', value: 250},
+            ]
+        };
+        var geoCoordMap = {
+            '沙集镇': [118.14, 33.90],
+            '长阳镇': [116.21, 39.76],
+            '福州市': [119.30, 26.07],
+            '莆田市': [119.00, 25.45],
+            '泉州市': [118.68, 24.87],
+            '厦门市': [118.10, 24.40],
+            '潮州市': [116.62, 23.65],
+            '东莞市': [113.75, 23.02],
+            '佛山市': [113.12, 23.02],
+            '广州市': [113.26, 23.13],
+            '惠州市': [114.41, 23.11],
+            '江门市': [113.08, 22.58],
+            '揭阳市': [116.37, 23.55],
+            '汕头市': [116.68, 23.35],
+            '中山市': [113.39, 22.52],
+            '保定市': [115.46, 38.87],
+            '沧州市': [116.84, 38.30],
+            '廊坊市': [116.68, 39.54],
+            '石家庄市': [114.51, 38.04],
+            '唐山市': [118.18, 39.63],
+            '邢台市': [114.50, 37.07],
+            '洛阳市': [112.45, 34.62],
+            '郑州市': [113.62, 34.74],
+            '常州市': [119.97, 31.81],
+            '连云港市': [119.22, 34.59],
+            '南通市': [120.89, 31.97],
+            '苏州市': [120.58, 31.29],
+            '泰州市': [119.92, 32.45],
+            '无锡市': [120.31, 31.49],
+            '宿迁市': [118.27, 33.96],
+            '徐州市': [118.29, 34.20],
+            '鞍山市': [122.99, 41.10],
+            '滨州市': [117.97, 37.38],
+            '菏泽市': [115.48, 35.23],
+            '青岛市': [120.38, 36.07],
+            '泰安市': [117.08, 36.20],
+            '天津市': [117.20, 39.09],
+            '杭州市': [120.16, 30.27],
+            '湖州市': [120.09, 30.89],
+            '嘉兴市': [120.76, 30.74],
+            '金华市': [119.65, 29.08],
+            '宁波市': [121.55, 29.87],
+            '绍兴市': [120.58, 30.03],
+            '台州市': [121.42, 28.65],
+            '温州市': [120.70, 27.99],
+        };
+
+        var convertData = function (data) {
+            var res = [];
+            for (var i = 0; i < data.length; i++) {
+                var geoCoord = geoCoordMap[data[i].name];
+                if (geoCoord) {
+                    res.push({
+                        name: data[i].name,
+                        value: geoCoord.concat(data[i].value)
+                    });
+                }
+            }
+            return res;
+        };
+
+        var option = {
+            backgroundColor: 'rgba(0,0,0,0)',
+            tooltip: {
+                padding: 5,
+                backgroundColor: 'rgba(0,0,0,0)',
+                borderColor: '#777',
+                borderWidth: 1,
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {
+                        // backgroundColor:'rgba(0,0,0,0)'
+                    }
+                }
+            },
+            geo: {
+                map: 'hengyangtest',
+                // map: 'china',
+                label: {
+                    emphasis: {
+                        show: false
+                    }
+                },
+                roam: false,
+                layoutCenter: ['50%', '50%'],
+                layoutSize: '100%',
+                itemStyle: {
+                    normal: {
+                        areaColor: '#00a4e7',
+                        borderColor: '#ccc',
+                        borderWidth:2
+                    },
+                    emphasis: {
+                        areaColor: '#001124',
+                        borderWidth:2
+                    }
+                },
+            },
+            series: [
+               /* {
+                    name: '淘宝第一镇',
+                    type: 'effectScatter',
+                    coordinateSystem: 'geo',
+                    data: convertData(data.theFirst),
+                    symbolSize: function (val) {
+                        return val[2] / 10;
+                    },
+                    showEffectOn: 'render',
+                    rippleEffect: {
+                        brushType: 'stroke'
+                    },
+                    hoverAnimation: true,
+                    label: {
+                        normal: {
+                            formatter: '{b}',
+                            position: 'right',
+                            show: true,
+                            fontSize: 18
+                        }
+                    },
+//				            tooltip: {
+//		                   		formatter: function (obj) {
+//		                            var value = obj.value;
+//		                            return obj.seriesName + '：{a}' + '<br>' + value[0];
+//			                      },
+//		                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#f4e925',
+                            shadowBlur: 10,
+                            shadowColor: 'red'
+                        }
+                    },
+                    zlevel: 2
+                },
+                {
+                    name: '淘宝村',
+                    type: 'scatter',
+                    coordinateSystem: 'geo',
+                    data: convertData(data.mainAddress),
+                    symbolSize: function (val) {
+                        return val[2] / 30;
+                    },
+                    showEffectOn: 'render',
+                    rippleEffect: {
+                        brushType: 'stroke'
+                    },
+                    hoverAnimation: true,
+                    label: {
+                        normal: {
+                            formatter: '{b}',
+                            position: 'right',
+                            show: false
+                        }
+                    },
+//				            tooltip: {
+//		                   		formatter: function (obj) {
+//		                            var value = obj.value;
+//		                            return obj.seriesName + '：{a}' + '<br>' + value[0];
+//			                      },
+//		                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#f4e925',
+                            shadowBlur: 10,
+                            shadowColor: 'red'
+                        }
+                    },
+                    zlevel: 1
+                },
+                {
+                    name: '淘宝村',
+                    type: 'scatter',
+                    coordinateSystem: 'geo',
+                    data: convertData(data.address),
+                    symbolSize: function (val) {
+                        return val[2] / 40;
+                    },
+                    showEffectOn: 'render',
+                    rippleEffect: {
+                        brushType: 'stroke'
+                    },
+                    hoverAnimation: true,
+                    label: {
+                        normal: {
+                            /!*   formatter: '{b}',
+                               position: 'right',*!/
+                            show: false
+                        }
+                    },
+//				            tooltip: {
+//		                   		formatter: function (obj) {
+//		                            var value = obj.value;
+//		                            return obj.seriesName + '：{a}' + '<br>' + value[0];
+//			                      },
+//		                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#f4e925',
+                            shadowBlur: 10,
+                            shadowColor: 'red'
+                        }
+                    },
+                    zlevel: 1
+                },*/
+            ]
+        };
+        showChart(option, 'map')
+    }
+</script>
+</body>
+</html>
